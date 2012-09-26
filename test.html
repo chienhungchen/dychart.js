@@ -12,30 +12,51 @@
 			{
 				display: inline-block;
 			}
+			#xDrop
+			{
+				height: 100px;
+				width: 49%;
+				float:left;
+				border: solid 2px #AAA;
+				margin-bottom: 10px;
+			}
+			#yDrop
+			{
+				height: 100px;
+				width: 49%;
+				margin-left:51%;
+				border: solid 2px #AAA;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body style="text-align:center;">
 		<div id="container"></div>
-		<div id="targetdiv"></div>
-		<div id="testdrag">
-			<div style="background-color: red; display:inline-block;">Test1</div>
-			<div style="background-color: blue; display:inline-block;">Test2</div>
-			<div style="background-color: green; display:inline-block;">Test3</div>
-			<div style="background-color: yellow; display:inline-block;">Test4</div>
+		<div id="targetdiv">
+			<div id="xDrop">Drag one of the column names here.</div>
+			<div id="yDrop">Drag one of the column names here.</div>
 		</div>
+		<div id="clickdiv">Click Me</div>
 		<script>
-			json_data = '[	{"colname" : "Company","data" : ["Company1", "Company2", "Company3", "Company4", "Company5", "Company6", "Company7", "Company8", "Company9", "Company10"]}, \
+			var json_data = '[	{"colname" : "Company","data" : ["Company1", "Company2", "Company3", "Company4", "Company5", "Company6", "Company7", "Company8", "Company9", "Company10"]}, \
 							{"colname" : "Size","data" : [10, 24, 31, 51, 4, 234, 42, 12, 15, 22]}, \
-							{"colname" : "Warning Type","data" : ["Low", "Medium", "High", "High", "Low", "Low", "Medium", "Low", "High", "High"]}, \
+							{"colname" : "Warning Type", "start":true, "data" : ["Low", "Medium", "High", "High", "Low", "Low", "Medium", "Low", "High", "High"]}, \
 							{"colname" : "Smoker Count","data" : [0, 4, 25, 35, 0, 23, 15, 1, 14, 22]},{"colname" : "Covered","data" : [1, 1, 0, 1, 1, 1, 1, 1, 0, 0]}	]';
 
+			var chartOptions = {
+            	chart: {
+                	renderTo: 'container'
+            	}
+        	};
+
 			$("#targetdiv").dychart({
-				"data" : json_data
+				"data" : json_data,
+				"chartType" : 'pie',
+				"chartOptions" : chartOptions,
+				"xDroppable" : $("#xDrop"),
+				"yDroppable" : $("#yDrop")
 			});
-			
-			$("#testdrag").find("div").each(function(){
-				$(this).draggable();
-			});
+
 		</script>
 	</body>
 </html>
