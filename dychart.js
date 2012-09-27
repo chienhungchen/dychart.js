@@ -5,13 +5,12 @@
 	var startColCount = 0;
 	var data;
 	var datacount = 0;
+	var parameters;
 
 	$.fn.dychart = function(params){
 		var namespace = $(this).attr('id') + '_dychart';
 		data = $.parseJSON(params.data);
-		console.log(data);
-		console.log("test");
-		console.log(data[2].data[5]);
+		parameters = params;
 		if(data != undefined || data != null){
 			datacount = data[0].data.length;
 		}
@@ -48,6 +47,7 @@
 		params.xDroppable.prepend($('<p />').text('XAxis Here')).droppable({
             drop: function( event, ui ) {
             	$(this).find('p').first().html($(ui.draggable).html());
+            	drawGraph($(ui.draggable).html());
         	}
         });
 
@@ -59,12 +59,7 @@
 
 		//Chart
 		$(document).ready(function() {
-
-			var initialData = getInitialData(params.chartType);
-			
-			console.log(initialData);
-
-			var series = { series: [{ type: params.chartType, data: initialData }] };
+			var series = { series: [{ type: params.chartType, data: getInitialData(params.chartType) }] };
 			$.extend(params.chartOptions, series);
         	chart = new Highcharts.Chart(params.chartOptions);
     	});
@@ -104,7 +99,7 @@
 			if(startColCount === 1 ){
 				for(var i = 0; i < data.length; i++){
 					if(data[i].start){
-						var values = data[i].data;
+						var values = data[i].data.slice(0);
 						$.unique(values);
 						var counts = countValues(values, data[i].data);
 						return buildData(values, counts);
@@ -112,9 +107,17 @@
 				}
 			}
 			else{
-				console.error('Your data has too many start columns.');
+				console.error('function getInitialData(chartType): Your data has too many start columns.');
 			}
 		}
+	}
+
+	function getData(columnData){
+		var values = columnData.slice(0);
+		$.unique(values);
+		console.log(values);
+		var counts = countValues(values, columnData);
+		return buildData(values, counts);
 	}
 
 	function countValues(values, rawData){
@@ -126,7 +129,6 @@
 					tempCount++;
 				}
 			}
-			console.log(rawData);
 			counts.push(tempCount);
 		}
 		return counts;
@@ -144,7 +146,25 @@
 			return data;
 		}
 		else{
-			console.error("In function buildData, values and counts do not have the same length.");
+			console.error("function buildData(values, counts): values and counts do not have the same length.");
+		}
+	}
+
+	function drawGraph(column){
+		var hasColumn = false;
+		for(var i = 0; i < data.length; i++){
+			if(column === data[i].colname){
+				hasColumn = true;
+				var currentData = getData(data[i].data);
+				console.log(currentData);
+				var series = { series: [{ type: parameters.chartType, data: currentData }] };
+				$.extend(parameters.chartOptions, series);
+				chart.destroy();
+        		chart = new Highcharts.Chart(parameters.chartOptions);
+			}
+		}
+		if(!hasColumn){
+			console.error("function drawGraph(column): column " + column + " does not exist");
 		}
 	}
 	
