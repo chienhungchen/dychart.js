@@ -100,7 +100,7 @@
 				for(var i = 0; i < data.length; i++){
 					if(data[i].start){
 						var values = data[i].data.slice(0);
-						$.unique(values);
+						values = unique(values);
 						var counts = countValues(values, data[i].data);
 						return buildData(values, counts);
 					}
@@ -114,8 +114,7 @@
 
 	function getData(columnData){
 		var values = columnData.slice(0);
-		$.unique(values);
-		console.log(values);
+		values = unique(values);
 		var counts = countValues(values, columnData);
 		return buildData(values, counts);
 	}
@@ -166,6 +165,24 @@
 		if(!hasColumn){
 			console.error("function drawGraph(column): column " + column + " does not exist");
 		}
+	}
+
+	function unique(array){
+		returnArr = [], exist = false;
+		for(var i = 0; i < array.length; i++){
+			for(var j = 0; j < returnArr.length; j++){
+				console.log(array[i] + " " + returnArr[j]);
+				if(array[i] === returnArr[j]){
+					exist = true;
+				}
+			}
+			if(!exist){
+				returnArr.push(array[i]);
+				exist = false;
+			}
+		}
+		console.log(returnArr);
+		return returnArr;
 	}
 	
 })(jQuery);
