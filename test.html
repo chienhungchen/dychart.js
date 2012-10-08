@@ -28,6 +28,11 @@
 				border: solid 2px #AAA;
 				margin-bottom: 10px;
 			}
+
+			#datatable, #datatable th, #datatable td
+			{
+				border: 1px solid black;
+			}
 		</style>
 	</head>
 	<body style="text-align:center;">
@@ -35,8 +40,8 @@
 		<div id="targetdiv">
 			<div id="xDrop">Drag one of the column names here.</div>
 			<div id="yDrop">Drag one of the column names here.</div>
+			<table id="datatable"></table>
 		</div>
-		<div id="clickdiv">Click Me</div>
 		<script>
 			var json_data = '[	{"colname" : "Company","data" : ["Company1", "Company2", "Company3", "Company4", "Company5", "Company6", "Company7", "Company8", "Company9", "Company10"]}, \
 							{"colname" : "Size","data" : [10, 24, 31, 51, 4, 234, 42, 12, 15, 22]}, \
@@ -54,7 +59,8 @@
 				chartType : 'pie',
 				chartOptions : chartOptions,
 				xDroppable : $("#xDrop"),
-				yDroppable : $("#yDrop")
+				yDroppable : $("#yDrop"),
+				tableElement : $("#datatable")
 			});
 
 		</script>

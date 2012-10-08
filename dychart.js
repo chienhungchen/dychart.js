@@ -1,6 +1,6 @@
 (function($, undefined){
 
-	//Global Vars in this scope
+	//Global vars in this scope
 	var chart;
 	var startColCount = 0;
 	var data;
@@ -14,11 +14,6 @@
 		if(data != undefined || data != null){
 			datacount = data[0].data.length;
 		}
-		
-		//Create datatable
-		var $table = $('<table />');
-		$table.attr('border', 1);
-		$table.attr('id', namespace + "_datatable");
 
 		//Add the headers
 		$tr = $('<tr />');
@@ -31,7 +26,7 @@
 				console.error("Your data does not all have the same count!");
 			}
 		}
-		$table.append($tr);
+		params.tableElement.append($tr);
 
 		//Add the data
 		for(var i = 0; i < datacount; i++){
@@ -39,9 +34,8 @@
 			for(var j = 0; j < data.length; j++){
 				$tr.append($('<td />').text(data[j].data[i]));
 			}
-			$table.append($tr);
+			params.tableElement.append($tr);
 		}
-		$(this).append($table);
 
 		//Droppable Areas
 		params.xDroppable.prepend($('<p />').text('XAxis Here')).droppable({
@@ -62,34 +56,6 @@
 			var series = { series: [{ type: params.chartType, data: getInitialData(params.chartType) }] };
 			$.extend(params.chartOptions, series);
         	chart = new Highcharts.Chart(params.chartOptions);
-    	});
-
-    	$("#clickdiv").click(function(){
-    		var chartOptions2 = {
-    			series: [{
-                	type: 'pie',
-                	data: [
-                    	['Firefox',   1.0],
-                    	['IE',       26.8],
-                    	{
-                        	name: 'Chrome',
-                        	y: 12.8,
-                        	sliced: true,
-                        	selected: true
-                    	},
-                    	['Safari',    8.5],
-                    	['Opera',     6.2],
-                    	['Others',   0.7]
-                	]
-            	}]
-    		};
-
-    		$.extend(params.chartOptions,chartOptions2);
-
-    		chart.destroy();
-    		$(document).ready(function() {
-        		chart = new Highcharts.Chart(params.chartOptions);
-    		});
     	});
 	};
 	
@@ -171,18 +137,15 @@
 		returnArr = [], exist = false;
 		for(var i = 0; i < array.length; i++){
 			for(var j = 0; j < returnArr.length; j++){
-				console.log(array[i] + " " + returnArr[j]);
 				if(array[i] === returnArr[j]){
 					exist = true;
 				}
 			}
 			if(!exist){
 				returnArr.push(array[i]);
-				exist = false;
 			}
+			exist = false;
 		}
-		console.log(returnArr);
 		return returnArr;
-	}
-	
+	}	
 })(jQuery);
