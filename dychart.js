@@ -18,7 +18,11 @@
 		//Add the headers
 		$tr = $('<tr />');
 		for(var i = 0; i < data.length; i++){
-			$tr.append($('<th />').text(data[i].colname).draggable({revert:true}));
+			$th = $('<th />').text(data[i].colname);
+			if(data[i].chartable){
+				$th.draggable({revert:true});
+			}
+			$tr.append($th);
 			if(data[i].start){
 				startColCount++;
 			}
@@ -104,7 +108,7 @@
 		if(values.length === counts.length){
 			for(var i = 0; i < values.length; i++){
 				var datapoint = [];
-				datapoint.push(values[i]);
+				datapoint.push(String(values[i]));
 				datapoint.push(counts[i]);
 				data.push(datapoint);
 			}
@@ -121,7 +125,6 @@
 			if(column === data[i].colname){
 				hasColumn = true;
 				var currentData = getData(data[i].data);
-				console.log(currentData);
 				var series = { series: [{ type: parameters.chartType, data: currentData }] };
 				$.extend(parameters.chartOptions, series);
 				chart.destroy();
