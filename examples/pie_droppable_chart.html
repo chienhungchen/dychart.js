@@ -5,7 +5,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 		<script src="http://code.highcharts.com/highcharts.js"></script>
-		<script src="dychart.js"></script>
+		<script src="../dychart.js"></script>
 		<script src="sampledata.js"></script>
 		
 		<style>
@@ -13,34 +13,21 @@
 			{
 				display: inline-block;
 			}
-			#xDrop
-			{
-				height: 100px;
-				width: 49%;
-				float:left;
-				border: solid 2px #AAA;
-				margin-bottom: 10px;
-			}
-			#yDrop
-			{
-				height: 100px;
-				width: 49%;
-				margin-left:51%;
-				border: solid 2px #AAA;
-				margin-bottom: 10px;
-			}
-
+			
 			#datatable, #datatable th, #datatable td
 			{
 				border: 1px solid black;
+			}
+
+			.chartable
+			{
+				background-color: #99CCDD;
 			}
 		</style>
 	</head>
 	<body style="text-align:center;">
 		<div id="container"></div>
 		<div id="targetdiv">
-			<div id="xDrop">Drag one of the column names here.</div>
-			<div id="yDrop">Drag one of the column names here.</div>
 			<table id="datatable"></table>
 		</div>
 		<script>
@@ -78,8 +65,9 @@
 				data : json_data,
 				chartType : 'pie',
 				chartOptions : chartOptions,
-				xDroppable : $("#xDrop"),
-				yDroppable : $("#yDrop"),
+				xDroppable : {
+					target : $("#container")
+				},
 				tableElement : $("#datatable")
 			});
 

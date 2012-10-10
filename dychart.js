@@ -20,7 +20,7 @@
 		for(var i = 0; i < data.length; i++){
 			$th = $('<th />').text(data[i].colname);
 			if(data[i].chartable){
-				$th.draggable({revert:true});
+				$th.draggable({revert:true}).attr('class', 'chartable');
 			}
 			$tr.append($th);
 			if(data[i].start){
@@ -42,19 +42,24 @@
 		}
 
 		//Droppable Areas
-		params.xDroppable.prepend($('<p />').text('XAxis Here')).droppable({
-            drop: function( event, ui ) {
-            	$(this).find('p').first().html($(ui.draggable).html());
-            	drawGraph($(ui.draggable).html());
-        	}
-        });
-
-		params.yDroppable.prepend($('<p />').text('YAxis Here')).droppable({
-            drop: function( event, ui ) {
-            	$(this).find('p').first().html($(ui.draggable).html());
-        	}
-        });
-
+		if(params.xDroppable != undefined){
+			params.xDroppable.target.prepend($('<p />').text((params.xDroppable.onStartText != undefined) ? params.xDroppable.onStartText : 'XAxis Here')).droppable({
+            	drop: function( event, ui ) {
+            		var dropText = (params.xDroppable.onDropText != undefined) ? params.xDroppable.onDropText($(ui.draggable).html()) : $(ui.draggable).html();
+            		$(this).find('p').first().html(dropText);
+            		drawGraph($(ui.draggable).html());
+        		}
+        	});
+		}
+		if(params.yDroppable != undefined){
+			params.yDroppable.target.prepend($('<p />').text((params.xDroppable.onStartText != undefined) ? params.xDroppable.onStartText : 'YAxis Here')).droppable({
+            	drop: function( event, ui ) {
+            		var dropText = (params.xDroppable.onDropText != undefined) ? params.xDroppable.onDropText($(ui.draggable).html()) : $(ui.draggable).html();
+            		$(this).find('p').first().html(dropText);
+        		}
+        	});
+		}
+		
 		//Chart
 		$(document).ready(function() {
 			var series = { series: [{ type: params.chartType, data: getInitialData(params.chartType) }] };
