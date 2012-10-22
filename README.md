@@ -12,15 +12,23 @@ xAxis and yAxis needs to be defined to at least {}
 
 ##Quick Breakdown (will update later)
 When series.type === 'pie'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [['itemName', count],['itemName2', count]]
 			
 When series.type === 'column'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 
 When series.type === 'line'
