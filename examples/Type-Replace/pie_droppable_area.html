@@ -5,11 +5,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 		<script src="http://code.highcharts.com/highcharts.js"></script>
-		<script src="../dychart.js"></script>
-		<script src="sampledata.js"></script>
+		<script src="../../dychart.js"></script>
+		<script src="../sampledata.js"></script>
 		
 		<style>
-			#targetdiv
+			.stylingdiv
 			{
 				display: inline-block;
 			}
@@ -37,7 +37,7 @@
 	</head>
 	<body style="text-align:center;">
 		<div id="container"></div>
-		<div id="targetdiv">
+		<div class="stylingdiv">
 			<div id="xDrop"></div>
 			<table id="datatable"></table>
 		</div>
@@ -50,7 +50,7 @@
                 	plotShadow: false
             	},
             	title: {
-                	text: 'Sample'
+                	text: 'Sample Pie Chart'
             	},
             	tooltip: {
                 	pointFormat: '{series.name}: <b>{point.percentage}%</b>',
@@ -69,12 +69,16 @@
                         	}
                     	}
                 	}
-            	}
+            	},
+				series:[{
+					type: 'pie'
+				}]
         	};
 
-			$("#targetdiv").dychart({
+			$("#datatable").dychart({
 				data : json_data,
-				chartType : 'pie',
+				dynamicType : 'replace',
+				axisCount : 1,
 				chartOptions : chartOptions,
 				xDroppable : {
 					target : $("#xDrop"),
@@ -82,8 +86,7 @@
 					onDropText : function(text){
 						return "Column: " + text;
 					}
-				},
-				tableElement : $("#datatable")
+				}
 			});
 
 		</script>

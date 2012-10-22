@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>dychart.js Testing Page</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="../../dychart.js"></script>
+		<script src="../sampledata.js"></script>
+		
+		<style>
+			.stylingdiv
+			{
+				display: inline-block;
+			}
+
+			#datatable, #datatable th, #datatable td
+			{
+				border: 1px solid black;
+			}
+
+			.chartable
+			{
+				background-color: #99CCDD;
+			}
+		</style>
+	</head>
+	<body style="text-align:center;">
+		<div id="container"></div>
+		<div class="stylingdiv">
+			<table id="datatable"></table>
+		</div>
+		<script>
+			var chartOptions = {
+				chart: {
+			    	renderTo: 'container',
+			    	type: 'bar'
+			    },
+			    title: { text: 'Sample Bar Chart' },
+			    plotOptions: {
+			    	column: {
+			            cursor: 'pointer',
+			            dataLabels: {
+			            	enabled: true,
+			               	style: { fontWeight: 'bold' }
+			            }
+			        }
+			    },
+			    tooltip: {
+			    	formatter: function() { return this.y; }
+			    },
+			    exporting: { enabled: false },
+				xAxis: {},
+				yAxis: {},
+				series:[{}]
+			};
+			
+			$("#datatable").dychart({
+				data : json_data_2,
+				dynamicType : 'replace',
+				chartOptions : chartOptions,
+				xDroppable : {
+					target : $("#container")
+				}
+			});
+
+		</script>
+	</body>
+</html>
