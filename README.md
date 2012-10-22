@@ -32,46 +32,73 @@ When series.type === 'column'
 		3. 'assigned'
 
 When series.type === 'line'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 		
 When series.type === 'bar'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 
 When series.type === 'scatter'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 		
 When series.type === 'area'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 		
 When series.type === 'areaspline'
+
 	dynamicType can be:
+	
 		1. 'replace'
+		
 			data style = [value, value, value]
+			
 		2. 'stack'
+		
 		3. 'assigned'
 
 When series.type === 'spline'
-	dynamicType can be:
-		1. 'replace'
-			data style = [value, value, value]
-		2. 'stack'
-		3. 'assigned'
 
+	dynamicType can be:
+	
+		1. 'replace'
 		
-spline
+			data style = [value, value, value]
+			
+		2. 'stack'
+		
+		3. 'assigned'
