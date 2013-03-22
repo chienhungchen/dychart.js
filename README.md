@@ -3,7 +3,7 @@ dychart.js - Dynamic Charts
 A plugin that crosses between jQuery UI and Highcharts (with support for Google Charts to come!)
 
 #License
-WTFPL or MIT. Which ever one suits your taste.
+MIT
 
 #Quick Notes (more to come later):
 
